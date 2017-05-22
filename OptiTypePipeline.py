@@ -206,6 +206,10 @@ if __name__ == '__main__':
                       required=True,
                       help="Specifies the out directory to which all files should be written."
                       )
+    parser.add_argument('--id','-s',
+                      required=False,
+                      help="Specifies an ID to be associated with the run."
+                      )
     parser.add_argument('--verbose','-v',
                       required=False,
                       action="store_true",
@@ -418,9 +422,9 @@ if __name__ == '__main__':
                          columns=["A1", "A2", "B1", "B2", "C1", "C2", "nof_reads", "obj"],
                          header=["A1", "A2", "B1", "B2", "C1", "C2", "Reads", "Objective"])
     
-    hlatype = result.iloc[0][["A1", "A2", "B1", "B2", "C1", "C2"]].drop_duplicates().dropna()
-    features_used = [('intron', 1), ('exon', 2), ('intron', 2), ('exon', 3), ('intron', 3)] \
-                     if not args.rna else [('exon',2),('exon',3)]
-    plot_variables = [pos, read_details, pos2, read_details2, (binary_p, binary_un, binary_mis)] if is_paired else [pos, read_details]
-    coverage_mat = ht.calculate_coverage(plot_variables, features, hlatype, features_used)
-    ht.plot_coverage(out_plot, coverage_mat, table, features, features_used)
+    # hlatype = result.iloc[0][["A1", "A2", "B1", "B2", "C1", "C2"]].drop_duplicates().dropna()
+    # features_used = [('intron', 1), ('exon', 2), ('intron', 2), ('exon', 3), ('intron', 3)] \
+    #                  if not args.rna else [('exon',2),('exon',3)]
+    # plot_variables = [pos, read_details, pos2, read_details2, (binary_p, binary_un, binary_mis)] if is_paired else [pos, read_details]
+    # coverage_mat = ht.calculate_coverage(plot_variables, features, hlatype, features_used)
+    # ht.plot_coverage(out_plot, coverage_mat, table, features, features_used)
