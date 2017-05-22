@@ -414,7 +414,7 @@ if __name__ == '__main__':
     r = result_4digit[["A1", "A2", "B1", "B2", "C1", "C2", "nof_reads", "obj"]]
 
     # write CSV to out. And generate plots
-    r.to_csv(out_csv, sep="\t",
+    r.to_csv(sys.stdout, sep="\t",
                          columns=["A1", "A2", "B1", "B2", "C1", "C2", "nof_reads", "obj"],
                          header=["A1", "A2", "B1", "B2", "C1", "C2", "Reads", "Objective"])
     
