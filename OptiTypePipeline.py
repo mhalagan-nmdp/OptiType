@@ -256,6 +256,7 @@ if __name__ == '__main__':
     bam_input = (input_extension in ('sam', 'bam', 'SAM', 'BAM'))  # otherwise treated as fastq
 
     # Constants
+    inputid = args.id
     VERBOSE = ht.VERBOSE = bool(args.verbose)  # set verbosity setting in hlatyper too
     COMMAND = "-i 97 -m 99999 --distance-range 0 -pa -tc %d -o %s %s %s"
     ALLELE_HDF = os.path.join(this_dir, 'data/alleles.h5')
@@ -417,10 +418,13 @@ if __name__ == '__main__':
             result_4digit[iii] = None
     r = result_4digit[["A1", "A2", "B1", "B2", "C1", "C2", "nof_reads", "obj"]]
 
+    # Add input id to dataframe 
+    r['ID'] = pd.Series([inputid])
+
     # write CSV to out. And generate plots
     r.to_csv(sys.stdout, sep="\t",
-                         columns=["A1", "A2", "B1", "B2", "C1", "C2", "nof_reads", "obj"],
-                         header=["A1", "A2", "B1", "B2", "C1", "C2", "Reads", "Objective"])
+                         columns=["ID", "A1", "A2", "B1", "B2", "C1", "C2", "nof_reads", "obj"],
+                         header=["ID", "A1", "A2", "B1", "B2", "C1", "C2", "Reads", "Objective"])
     
     # hlatype = result.iloc[0][["A1", "A2", "B1", "B2", "C1", "C2"]].drop_duplicates().dropna()
     # features_used = [('intron', 1), ('exon', 2), ('intron', 2), ('exon', 3), ('intron', 3)] \
